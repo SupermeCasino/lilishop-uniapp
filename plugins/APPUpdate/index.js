@@ -5,6 +5,27 @@
 import { getAppVersion } from "@/api/message.js";
 
 const platform = uni.getSystemInfoSync().platform;
+
+// 版本号比较函数
+function compareVersion(version1, version2) {
+  const v1Parts = version1.split('.').map(Number);
+  const v2Parts = version2.split('.').map(Number);
+  
+  const maxLength = Math.max(v1Parts.length, v2Parts.length);
+  
+  for (let i = 0; i < maxLength; i++) {
+    const v1Part = v1Parts[i] || 0;
+    const v2Part = v2Parts[i] || 0;
+    
+    if (v1Part > v2Part) {
+      return 1;
+    } else if (v1Part < v2Part) {
+      return -1;
+    }
+  }
+  
+  return 0;
+}
 // 主颜色
 const $mainColor = "#1ABC9C";
 // 弹窗图标url
@@ -29,7 +50,7 @@ export const getServerNo = function (callback) {
   platform == "android" ? (type = "ANDROID") : (type = "IOS");
 
   getAppVersion(type).then((res) => {
-    if (res.data.success && res.data.result.downloadUrl) {
+    if (res.data.success && res.data.result && res.data.result.downloadUrl) {
       let response = res.data.result;
       let result = {};
       result.versionCode = response.version;
@@ -854,11 +875,9 @@ function downloadPopup(data, callback, cancelCallback, rebootCallback) {
 export default function (isPrompt = false) {
   getCurrentNo((version) => {
     getServerNo((res) => {
-
-      if (res.versionCode.replace(/\./g, "") <= version.version.replace(/\./g, "")) {
+      if (compareVersion(res.versionCode, version.version) <= 0) {
         return false;
       }
-
       if (res.forceUpdate) {
         if (/\.wgt$/i.test(res.downloadUrl)) {
           getDownload(res);
