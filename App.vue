@@ -64,11 +64,12 @@ import {
 		methods: {
 			...mapMutations(["login"]),
 		},
-		onLaunch: function() {
-			// #ifdef APP-PLUS
-			this.checkArguments(); // 检测启动参数
-			APPUpdate();
+		onLaunch: function(val) {
+			if(val.query.inviter){
+				storage.setInviter(val.query.inviter)
+			}
 
+      // #ifdef APP-PLUS
 			// 重点是以下： 一定要监听后台恢复 ！一定要
 			plus.globalEvent.addEventListener("newintent", (e) => {
 				this.checkArguments(); // 检测启动参数

@@ -1,5 +1,12 @@
 ## Lilishop B2B2C 商城系统
 
+### 近期常出现的问题解决方法
+
+1. 高版本hbulider启动会报错建议先固定使用 4.45
+2. 编译到微信小程序会报错 xxx defined 这里注意微信小程序基础调试库要使用 3.5.3 
+
+
+
 ### 商城介绍
 
 **官网**：https://pickmall.cn
@@ -87,6 +94,8 @@ git clone https://gitee.com/beijing_hongye_huicheng/lilishop-uniapp.git
 1.需要保证本地要有`微信开发者工具` https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 
 2.在`hbulider`中点击`运行`->`运行到小程序模拟器`->`微信开发者工具` 运行的时候需要配置小程序的`appid`，配置完成后即可运行
+
+
 
 #### 运行 APP
 

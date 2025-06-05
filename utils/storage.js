@@ -10,6 +10,13 @@ const FINGER_LOGIN = isDev ? "finger_login_dev" : "finger_login";
 const CART_BACKBTN = isDev ? "cart_backbtn_dev" : "cart_backbtn";
 const AFTERSALE_DATA = isDev ? "aftersale_data_dev" : "aftersale_data";
 export default {
+	setInviter(val){
+		uni.setStorageSync('inviter', val)
+	},
+	getInviter(){
+		return uni.getStorageSync('inviter');
+	},
+
   //写入自动发券
   setAutoCp(val){
     uni.setStorageSync('autoCp', val)

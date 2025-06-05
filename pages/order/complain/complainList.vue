@@ -28,9 +28,8 @@
         <view class="complain-speak"> {{ item.complainTopic }} </view>
       </view>
       <view class="complain-btn">
-        <u-tag mode="plain" @click="handleClear(item)" class="complain-tag" text="撤销投诉" type="info" v-if="
-            item.complainStatus != 'EXPIRED' && item.complainStatus != 'CANCEL'
-          " />
+        <u-tag mode="plain" @click="handleClear(item)" class="complain-tag" text="撤销投诉" type="info"
+		 v-if="item.complainStatus === 'APPLYING' || item.complainStatus === 'NEW'" />
         <u-tag mode="plain" @click="handleInfo(item)" class="complain-tag" text="投诉详情" type="info" />
       </view>
     </view>

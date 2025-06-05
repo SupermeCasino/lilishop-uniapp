@@ -10,16 +10,8 @@
     </div>
     <!-- 物流信息 -->
     <view class="info-view logistics-view">
-      <view class="logistics-List" v-if="logisticsList && logisticsList.traces && logisticsList.traces.length != 0 ">
-        <view class="logistics-List-title">
-          {{ logisticsList.traces[logisticsList.traces.length - 1].AcceptStation }}
-        </view>
-        <view class="logistics-List-time">
-          {{ logisticsList.traces[logisticsList.traces.length - 1].AcceptTime }}
-        </view>
-      </view>
 
-      <view class="logistics-List" v-else>
+      <view class="logistics-List">
         <view class="verificationCode" v-if="order.verificationCode">
           券码： {{ order.orderStatus == 'CANCELLED' ?  '已失效' : order.verificationCode }}
         </view>

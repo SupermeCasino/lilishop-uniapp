@@ -1,7 +1,7 @@
 <template>
   <view class="securityCenter">
     <u-cell-group>
-      <u-cell-item title="修改密码" @click="navigateTo('/pages/mine/set/securityCenter/editPassword')"></u-cell-item>
+      <u-cell-item title="修改密码" @click="navigateTo('/pages/mine/set/securityCenter/updatePwdTab')"></u-cell-item>
       <u-cell-item title="注销账户" @click="zhuxiao"></u-cell-item>
     </u-cell-group>
   </view>

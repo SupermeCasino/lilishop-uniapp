@@ -96,6 +96,19 @@ export function modifyPass(params) {
 }
 
 /**
+ * 修改密码
+ * @param  newPassword
+ * @param  password
+ */
+export function resetPassword(params) {
+  return http.request({
+    url: `/passport/member/resetPassword`,
+    method: "POST",
+    params,
+  });
+}
+
+/**
  * 刷新token
  */
 export function refreshTokenFn(refresh_token) {

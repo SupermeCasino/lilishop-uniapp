@@ -97,6 +97,10 @@
           </view>
           
           
+<!--          <view class="interact-item" @click="inviter()">-->
+<!--          	<image src="/static/mine/share.png" mode=""></image>-->
+<!--          	<view>邀新</view>-->
+<!--          </view>-->
           <view class="interact-item" @click="navigateTo('/pages/mine/set/setUp')">
             <image src="/static/mine/setting.png" mode=""></image>
             <view>设置</view>
@@ -105,6 +109,23 @@
 		  
         </view>
       </div>
+	  
+	  			<template>
+	  				<u-popup v-model="sharingShow" mode="bottom" border-radius="14">
+	  					<view style="margin: 10px; text-align: center;"> 请邀请用户扫描二维码或者将地址复制转发给其他用户 </view>
+	  					<view class='qrcode'>
+	  						<uqrcode ref="uqrcode" canvas-id="qrcode" :value="sharingLink" :options="{ margin: 10 }">
+	  						</uqrcode>
+	  					</view>
+	  
+						  <view class="copy-text" @click="getDetail(sharingLink)">
+							{{sharingLink}}
+						  </view>
+	  					<view class="confrim-btn">
+	  						<u-button @click="sharingShow = false;">关闭</u-button>
+	  					</view>
+	  				</u-popup>
+	  			</template>
     </view>
   </view>
 </template>
@@ -117,8 +138,11 @@ import storage from "@/utils/storage";
 export default {
   data() {
 	return {
-	  configs,
-	  storage
+			configs,
+			storage,
+			repayingShow: false, //分销清退弹框
+			sharingShow: false,
+			sharingLink: ""
 	  }
   },
 	
@@ -127,6 +151,18 @@ export default {
 			uni.navigateTo({
 				url,
 			});
+		},
+		inviter() {
+			if (storage.getUserInfo().id) {
+				this.sharingLink = this.configs.shareLink + "?inviter=" + this.storage.getUserInfo().id
+				this.sharingShow = true
+			} else {
+				uni.showToast({
+					title: "请先登录",
+					duration: 2000,
+					icon: "none",
+				});
+			}
 		},
     navigateTo(url) {
       const ignores = [
@@ -194,41 +230,58 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.copy-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  line-break: anywhere;
+}
+
 .interact-tools {
-  border-left: none;
-  border-right: none;
+	border-left: none;
+	border-right: none;
 
 
-  .interactBox {
-    height: 156rpx;
-  }
-  .interact-container {
-    margin: 0 20rpx;
-    background: #fff;
-    border-radius: 20rpx;
-    box-shadow: 0 4rpx 24rpx 0 rgba($color: #f6f6f6, $alpha: 1);
-    .interact-item-img {
-      width: 52rpx !important;
-      height: 52rpx !important;
-      // margin-bottom:  !important;
-      margin: 0 auto 6rpx auto !important;
-    }
-    image {
-      width: 52rpx;
-      height: 52rpx;
-      margin-bottom: 6rpx;
-    }
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    text-align: center;
+	.interactBox {
+		height: 156rpx;
+	}
 
-    .interact-item {
-      font-size: $font-sm;
-      width: 25%;
-      height: 160rpx;
-      padding: 30rpx;
-    }
-  }
+	.interact-container {
+		margin: 0 20rpx;
+		background: #fff;
+		border-radius: 20rpx;
+		box-shadow: 0 4rpx 24rpx 0 rgba($color: #f6f6f6, $alpha: 1);
+
+		.interact-item-img {
+			width: 52rpx !important;
+			height: 52rpx !important;
+			// margin-bottom:  !important;
+			margin: 0 auto 6rpx auto !important;
+		}
+
+		image {
+			width: 52rpx;
+			height: 52rpx;
+			margin-bottom: 6rpx;
+		}
+
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		text-align: center;
+
+		.interact-item {
+			font-size: $font-sm;
+			width: 25%;
+			height: 160rpx;
+			padding: 30rpx;
+		}
+	}
+}
+
+.qrcode {
+	margin: 0 auto;
+	width: 200px;
 }
 </style>

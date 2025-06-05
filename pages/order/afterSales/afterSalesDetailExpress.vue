@@ -10,7 +10,7 @@
           </view>
         </view>
         <view>
-          <view class="goods-item-view" @click="gotoGoodsDetail(sku.skuId)">
+          <view class="goods-item-view" @click="gotoGoodsDetail(sku)">
             <view class="goods-img">
               <u-image border-radius="6" width="131rpx" height="131rpx" :src="sku.image"></u-image>
             </view>
@@ -33,30 +33,38 @@
             <div style="width: 100%; text-align: right;">快递至第三方卖家</div>
           </u-form-item>
           <u-form-item label="快递公司" :label-width="150">
-            <div style="width: 100%; text-align: right;" @click="companySelectShow = true" >{{ form.courierCompany || '请选择快递公司' }}</div>
+            <div style="width: 100%; text-align: right;" @click="companySelectShow = true">
+              {{ form.courierCompany || '请选择快递公司' }}
+            </div>
           </u-form-item>
           <u-form-item label="快递单号" :label-width="150">
-            <u-input input-align="right" v-model="form.logisticsNo" placeholder="请输入快递单号" />
+            <u-input input-align="right" v-model="form.logisticsNo" placeholder="请输入快递单号"/>
           </u-form-item>
           <u-form-item label="发货时间" :label-width="150">
-            <div style="width: 100%; text-align: right;" @click="timeshow = true" >{{ form.mDeliverTime || '请选择发货时间' }}</div>
+            <div style="width: 100%; text-align: right;" @click="timeshow = true">{{
+                form.mDeliverTime || '请选择发货时间'
+              }}
+            </div>
           </u-form-item>
         </view>
       </scroll-view>
 
       <view class="submit-view">
-        <u-button ripple :customStyle="{'background':$lightColor,'color':'#fff' }" shape="circle" @click="onSubmit">提交申请</u-button>
+        <u-button ripple :customStyle="{'background':$lightColor,'color':'#fff' }" shape="circle" @click="onSubmit">
+          提交申请
+        </u-button>
       </view>
     </u-form>
-    <u-select mode="single-column" :list="companyList" v-model="companySelectShow" @confirm="companySelectConfirm"></u-select>
+    <u-select mode="single-column" :list="companyList" v-model="companySelectShow"
+              @confirm="companySelectConfirm"></u-select>
     <u-calendar v-model="timeshow" :mode="'date'" @change="onTimeChange"></u-calendar>
-    <u-toast ref="uToast" />
+    <u-toast ref="uToast"/>
   </view>
 </template>
 
 <script>
-import { getLogistics } from "@/api/address.js";
-import { fillShipInfo } from "@/api/after-sale.js";
+import {getLogistics} from "@/api/address.js";
+import {fillShipInfo} from "@/api/after-sale.js";
 import storage from "@/utils/storage";
 
 export default {
@@ -77,7 +85,7 @@ export default {
     };
   },
   onLoad(options) {
-    
+
     this.sku = storage.getAfterSaleData();
     let navTitle = "服务单详情";
     uni.setNavigationBarTitle({
@@ -122,13 +130,39 @@ export default {
      * 点击提交
      */
     onSubmit() {
+      delete this.form.courierCompany;
+
+      if (this.form.logisticsId == "") {
+        this.$refs.uToast.show({
+          title: "请选择快递公司",
+          type: "error",
+        });
+        return;
+      }
+      if (this.form.logisticsNo == "") {
+        this.$refs.uToast.show({
+          title: "请填写快递单号",
+          type: "error",
+        });
+        return;
+      }
+      if (this.form.mDeliverTime == "") {
+        this.$refs.uToast.show({
+          title: "请选择发货时间",
+          type: "error",
+        });
+        return;
+      }
+
       uni.showLoading({
         title: "加载中",
         mask: true,
       });
-      delete this.form.courierCompany;
       fillShipInfo(this.serviceDetail.sn, this.form).then((res) => {
-         if (this.$store.state.isShowToast){ uni.hideLoading() };
+        if (this.$store.state.isShowToast) {
+          uni.hideLoading()
+        }
+        ;
         if (res.statusCode === 200) {
           this.$refs.uToast.show({
             title: "提交成功",
@@ -137,6 +171,11 @@ export default {
             url: "/pages/order/afterSales/afterSales",
           });
         }
+      });
+    },
+    gotoGoodsDetail(sku) {
+      uni.navigateTo({
+        url: `/pages/product/goods?id=${sku.skuId}&goodsId=${sku.goodsId}`,
       });
     },
   },
@@ -149,12 +188,15 @@ page,
   background: $page-color-base;
   height: 100%;
 }
+
 .mp-iphonex-bottom {
   overflow: hidden;
 }
+
 .after-sales-goods-detail-view {
   background-color: #fff;
   padding: 10rpx 0rpx;
+
   .header {
     background-color: #f7f7f7;
     color: #999999;
@@ -164,15 +206,18 @@ page,
     align-items: center;
     justify-content: center;
     line-height: 70rpx;
+
     .header-text {
       background-color: #999999;
       padding: 10rpx 30rpx;
       border-radius: 50rpx;
     }
+
     .seller-name {
       color: $main-color;
     }
   }
+
   .goods-item-view {
     display: flex;
     flex-direction: row;
@@ -182,15 +227,18 @@ page,
     .goods-info {
       padding-left: 30rpx;
       flex: 1;
+
       .goods-title {
         margin-bottom: 10rpx;
         color: $font-color-dark;
       }
+
       .goods-specs {
         font-size: 24rpx;
         margin-bottom: 10rpx;
         color: #cccccc;
       }
+
       .goods-price {
         display: flex;
         flex-direction: row;
@@ -198,23 +246,27 @@ page,
         font-size: 28rpx;
         margin-bottom: 10rpx;
         color: $light-color;
+
         .num {
           font-size: 24rpx;
           color: #999999;
         }
       }
     }
+
     .goods-num {
       width: 60rpx;
       color: $main-color;
     }
   }
 }
+
 .opt-view {
   background-color: #fff;
   padding: 40rpx 30rpx 0rpx 30rpx;
 
   font-size: 26rpx;
+
   .how-view {
     display: flex;
     flex-direction: row;
@@ -223,18 +275,21 @@ page,
     height: 80rpx;
     border-bottom: 1px solid $page-color-base;
   }
+
   .explain-view {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 150rpx;
   }
+
   .img-title {
     height: 80rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
   }
+
   .images-view {
     padding: 20rpx;
     display: flex;
@@ -243,6 +298,7 @@ page,
     flex-wrap: wrap;
   }
 }
+
 .submit-view {
   position: fixed;
   z-index: 999;

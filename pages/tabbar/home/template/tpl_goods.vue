@@ -108,7 +108,6 @@ export default {
       handler(val) {
         // 监听父级的值 如果有值将值赋给selected
         if (val) {
-          console.log(val)
           // 如果第一个标签页绑定为商品
           this.selected.val = this.res.list[0].listWay[0] ? this.res.list[0].listWay[0].type: '';
           // 如果第一个标签为绑定为分类

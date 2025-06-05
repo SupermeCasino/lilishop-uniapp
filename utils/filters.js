@@ -368,7 +368,7 @@ export function quiteLoginOut () {
 export function logoff () {
   uni.showModal({
     title: "提示",
-    content: "确认注销用户么？注销用户将无法再次登录并失去当前数据就。根据法规数据最长保留6个月，期间可以联系客服人员进行恢复数据。",
+    content: "确认注销用户么？注销用户将无法再次登录并失去当前数据。",
     confirmColor: Vue.prototype.$mainColor,
     async success (res) {
       if (res.confirm) {

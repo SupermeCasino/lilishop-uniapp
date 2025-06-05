@@ -25,14 +25,12 @@
 						business="FIND_USER" />
 				</view>
 				<view v-if="validateFlage">
-					<u-form-item label-width="120" label="旧密码">
-						<u-input type="password" v-model="password" placeholder="请输入您的旧密码" />
+					<u-form-item label-width="120" label="密码">
+						<u-input type="password" v-model="password" placeholder="请输入您的密码" />
 					</u-form-item>
 
-					<u-form-item label-width="120" label="新密码">
-
-						<u-input type="password" v-model="newPassword" placeholder="请输入您的新密码" />
-
+					<u-form-item label-width="120" label="确认密码">
+						<u-input type="password" v-model="newPassword" placeholder="请再次输入您的密码" />
 					</u-form-item>
 
 					<view class="submit" @click="updatePassword">修改密码</view>
@@ -46,7 +44,7 @@
 	import {
 		sendMobile,
 		resetByMobile,
-		modifyPass
+		resetPassword
 	} from "@/api/login";
 
 	import {
@@ -139,8 +137,14 @@
 		methods: {
 			// 修改密码
 			updatePassword() {
-				modifyPass({
-					newPassword: md5(this.newPassword),
+				if(this.password !== this.newPassword){
+					uni.showToast({
+						title: "两次输入密码不一致!",
+						icon: "none",
+					});
+					return;
+				}
+				resetPassword({
 					password: md5(this.password),
 				}).then((res) => {
 					if (res.data.success) {

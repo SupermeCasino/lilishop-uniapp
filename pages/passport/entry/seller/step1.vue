@@ -162,8 +162,18 @@
               :max-count="1"
               :show-progress="false"
             ></u-upload>
+            <u-upload
+              :file-list="legalPhotoFileList"
+              :header="{ accessToken: storage.getAccessToken() }"
+              :action="action"
+              width="200"
+              @on-uploaded="onUploaded($event, 'legalPhoto')"
+              :max-count="1"
+              :show-progress="false"
+            ></u-upload>
           </div>
         </u-form-item>
+        {{form}}
       </div>
     </u-form>
     <div class="submit" @click="validatorStep1Form">提交/下一步</div>
@@ -277,7 +287,18 @@ export default {
           { pattern: RegExp.licenseNum, message: "请输入正确的营业执照号" },
         ],
         scope: [{ required: true, message: "请填写营业执照所示经营范围" }],
-        legalPhoto: [{ required: true, message: "请上传法人身份证照片" }],
+        legalPhoto: [{ required: true, message: "请上传法人身份证照片" },
+          {
+            // 自定义验证函数，见上说明
+            validator: (rule, value, callback) => {
+              // 上面有说，返回true表示校验通过，返回false表示不通过
+              // this.$u.test.mobile()就是返回true或者false的
+              return value.length === 2;
+            },
+            message: "请上传法人身份证正反照片",
+            // 触发器可以同时用blur和change
+            trigger: ["change", "blur"],
+          }],
         licencePhoto: [{ required: true, message: "请上传营业执照" }],
         legalName: [{ required: true, message: "请输入法人姓名" }],
         legalId: [
@@ -314,10 +335,13 @@ export default {
     // 图片上传
     onUploaded(lists, key) {
       let images = [];
+      if(!this.form[key]){
+        this.form[key] = [];
+      }
       lists.forEach((item) => {
         images.push(item.response.result);
       });
-      this.form[key] = images;
+      this.form[key].push(images[0]);
     },
     getPickerParentValue(e) {
       this.form.companyAddressIdPath = [];

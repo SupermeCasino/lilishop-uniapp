@@ -313,6 +313,18 @@
 					}
 				},
 				{
+					"path": "set/securityCenter/updatePwdTab",
+					"style": {
+						"navigationBarTitleText": "修改密码"
+					}
+				},
+				{
+					"path": "set/securityCenter/editLoginPassword",
+					"style": {
+						"navigationBarTitleText": "修改密码"
+					}
+				},
+				{
 					"path": "set/securityCenter/securityCenter",
 					"style": {
 						"navigationBarTitleText": "安全中心"

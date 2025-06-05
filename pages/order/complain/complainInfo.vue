@@ -35,13 +35,15 @@
       </view>
     </view>
     <view class="speak-way" v-else>暂无对话</view>
-    <view class="tips">回复对话</view>
-    <view class="cell-item complain-content">
-      <view class="cell-view content">
-        <u-input type="textarea" height="70rpx" auto-height v-model="complainValue" />
-      </view>
-    </view>
-    <view class="submit-btn" @click="handleSubmit">回复</view>
+	<div v-if="complainDetail.complainStatus!='COMPLETE'">
+		<view class="tips">回复对话</view>
+		<view class="cell-item complain-content">
+		  <view class="cell-view content">
+			<u-input type="textarea" height="70rpx" auto-height v-model="complainValue" />
+		  </view>
+		</view>
+		<view class="submit-btn" @click="handleSubmit">回复</view>
+	</div>
     <view class="tips">平台仲裁</view>
     <u-cell-group>
       <u-cell-item :arrow="false" title="仲裁意见" :value="complainDetail.arbitrationResult || '暂无'"></u-cell-item>
