@@ -30,13 +30,15 @@
 </template>
 
 <script>
-	import {
-		sendMobile,
-		bindMobile
-	} from "@/api/login";
+import {
+	sendMobile,
+	bindMobile
+} from "@/api/login";
+import { getUserInfo } from "@/api/members.js";
+import storage from "@/utils/storage.js";
 
-	import myVerification from "@/components/verification/verification.vue"; //验证
-	import uuid from "@/utils/uuid.modified.js";
+import myVerification from "@/components/verification/verification.vue"; //验证
+import uuid from "@/utils/uuid.modified.js";
 	export default {
 		components: {
 			myVerification,
@@ -123,17 +125,24 @@
 						bindMobile(this.codeForm).then((res) => {
 							if (res.data.success) {
 								this.validateFlage = !this.validateFlage;
-								// 登录成功
-								uni.showToast({
-									title: "绑定成功!",
-									duration: 2000,
-									icon: "none",
-								});
-								setTimeout(() => {
-									uni.navigateBack({
-										delta: 1,
+								// 获取最新的用户信息并更新缓存
+								getUserInfo().then(userRes => {
+									if (userRes.data.success) {
+										storage.setUserInfo(userRes.data.result);
+									}
+									// 显示成功提示
+									uni.showToast({
+										title: "绑定成功!",
+										duration: 2000,
+										icon: "none",
 									});
-								}, 1000);
+									// 返回上一页
+									setTimeout(() => {
+										uni.navigateBack({
+											delta: 1,
+										});
+									}, 1000);
+								});
 							}
 						});
 					}

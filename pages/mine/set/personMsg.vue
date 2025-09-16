@@ -28,7 +28,7 @@
 			{{form.mobile}}
 		</view>
 		<view v-else>
-			<view class="submit" @click="navigateTo(form.username)">绑定手机号码</view>
+			<view class="submit" style="text-align: left;" @click="navigateTo(form.username)">绑定手机号码</view>
 		</view>
 	  </u-form-item>
     
@@ -59,8 +59,8 @@ export default {
         region: storage.getUserInfo().region || [], //地址
         sex: storage.getUserInfo().sex, //性别
         ___path: storage.getUserInfo().region,
-		mobile: storage.getUserInfo().mobile,
-		username: storage.getUserInfo().username,
+        mobile: storage.getUserInfo().mobile,
+        username: storage.getUserInfo().username,
       },
       birthday: storage.getUserInfo().birthday || "", //生日
       photo: [
@@ -183,6 +183,24 @@ export default {
    * 加载数据
    */
   onLoad() {},
+  
+  /**
+   * 页面显示时执行
+   */
+  onShow() {
+    // 从缓存中重新获取用户信息
+    const userInfo = storage.getUserInfo();
+    // 更新表单数据
+    this.form.nickName = userInfo.nickName || "";
+    this.form.birthday = userInfo.birthday || "";
+    this.form.face = userInfo.face || "/static/missing-face.png";
+    this.form.region = userInfo.region || [];
+    this.form.sex = userInfo.sex;
+    this.form.___path = userInfo.region;
+    this.form.mobile = userInfo.mobile;
+    this.form.username = userInfo.username;
+    this.birthday = userInfo.birthday || "";
+  },
 };
 </script>
 <style>
@@ -201,6 +219,7 @@ page{
   margin: 0 auto;
   color: $main-color;
   border-radius: 100px;
+
 }
 .head {
   height: 260rpx;
