@@ -151,10 +151,10 @@ export default {
   border-radius: 0 0 20rpx 20rpx;
   margin: 0 20rpx;
   font-size: 26rpx;
-  /deep/ .u-col {
+  ::v-deep .u-col {
     text-align: center !important;
   }
-  /deep/ .u-col:first-child {
+  ::v-deep .u-col:first-child {
     border-right: 1px solid $border-color-light;
   }
   .pcolor {

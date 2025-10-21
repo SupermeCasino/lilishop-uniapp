@@ -125,7 +125,7 @@ export default {
   display: block;
 }
 
-/deep/ .u-mode-light-error {
+::v-deep .u-mode-light-error {
   border: none;
 }
 

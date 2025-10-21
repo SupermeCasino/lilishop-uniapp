@@ -162,7 +162,7 @@ export default {
   font-size: 24rpx;
   color: #999;
 }
-/deep/ .seller-name {
+::v-deep .seller-name {
   width: auto !important;
 }
 .complain-btn {

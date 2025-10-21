@@ -219,7 +219,7 @@ body {
       line-height: 1;
     }
 
-    /deep/ .u-icon,
+    ::v-deep .u-icon,
     .u-icon {
       margin-top: 106rpx;
     }

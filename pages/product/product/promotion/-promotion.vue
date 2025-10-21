@@ -126,7 +126,7 @@ export default {
 	color: #333333;
 	margin-left: 20rpx;
 }
-/deep/ .u-mode-light-error {
+::v-deep .u-mode-light-error {
 	border: none;
 }
 .coupon{

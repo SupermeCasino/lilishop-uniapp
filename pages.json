@@ -367,7 +367,8 @@
 				}, {
 					"path": "point/myPoint",
 					"style": {
-						"navigationBarTitleText": "我的积分"
+						"navigationBarTitleText": "",
+						"navigationStyle": "custom"
 					}
 				},
 				 {
