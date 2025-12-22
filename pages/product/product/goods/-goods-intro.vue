@@ -34,23 +34,14 @@
           <div class="param-list" v-if="goodsParams.length == 0">
             <u-empty text="暂无商品参数" mode="list"></u-empty>
           </div>
-          <div
-            class="params-group"
-            v-for="(group, groupIndex) in goodsParams"
-            :key="groupIndex"
-          >
-            <view style="font-weight: bold; margin-left: 10px">{{
-              group.groupName
-            }}</view>
-            <div class="param-list">
-              <div
-                class="param-item"
-                v-for="(param, index) in group.goodsParamsItemDTOList"
-                :key="index"
-              >
-                <div class="param-left">{{ param.paramName }}</div>
-                <div class="param-right">{{ param.paramValue }}</div>
-              </div>
+          <div class="param-list" v-else>
+            <div
+              class="param-item"
+              v-for="(param, index) in goodsParams"
+              :key="index"
+            >
+              <div class="param-left">{{ param.paramName }}</div>
+              <div class="param-right">{{ param.paramValue }}</div>
             </div>
           </div>
         </view>
