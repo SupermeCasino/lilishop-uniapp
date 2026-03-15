@@ -41,7 +41,6 @@
 </template>
 <script>
 import { applyDistribution } from "@/api/goods";
-import { checkBankno } from "@/utils/Foundation";
 export default {
   data() {
     return {
@@ -76,19 +75,9 @@ export default {
         settlementBankBranchName: [
           {
             required: true,
-            message: "银行开户行",
+            message: "请输入银行开户行",
             // 可以单个或者同时写两个触发验证方式
             trigger: "blur",
-          },
-          {
-            validator: (rule, value, callback) => {
-              // 上面有说，返回true表示校验通过，返回false表示不通过
-              // this.$u.test.mobile()就是返回true或者false的
-              return this.$u.test.chinese(value);
-            },
-            message: "银行开户行不正确",
-            // 触发器可以同时用blur和change
-            trigger: ["change", "blur"],
           },
         ], //银行开户名
         settlementBankAccountName: [
@@ -103,17 +92,9 @@ export default {
         settlementBankAccountNum: [
           {
             required: true,
-            message: "银行账号不正确",
+            message: "请输入银行账号",
             // 可以单个或者同时写两个触发验证方式
             trigger: "blur",
-          },
-          {
-            validator: (rule, value, callback) => {
-              // 上面有说，返回true表示校验通过，返回false表示不通过
-              // this.$u.test.mobile()就是返回true或者false的
-              return checkBankno(value);
-            },
-            message: "银行账号不正确",
           },
         ],
         idNumber: [
