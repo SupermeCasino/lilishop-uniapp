@@ -468,10 +468,11 @@ export default {
      */
     receiptType(type) {
       switch (type) {
+        case "1":
         case "VATORDINARY":
-          return "增值税普通发票";
         case "ELECTRO":
           return "电子普通发票";
+        case "2":
         case "VATOSPECIAL":
           return "增值税专用发票";
         default:
