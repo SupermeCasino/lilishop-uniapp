@@ -1,226 +1,153 @@
-## Lilishop B2B2C 商城系统
+# Lilishop(PickMall) 开源商城系统
 
-### 近期常出现的问题解决方法
+[![GitHub Stars](https://img.shields.io/github/stars/hongyehuicheng/lilishop.svg?style=social&logo=github)](https://github.com/hongyehuicheng/lilishop)
+[![Gitee Stars](https://gitee.com/beijing_hongye_huicheng/lilishop/badge/star.svg?theme=dark)](https://gitee.com/beijing_hongye_huicheng/lilishop)
+<p align="right">
+  简体中文 | <a href="./README.en.md">English</a>
+</p>
 
-1. 高版本hbulider启动会报错建议先固定使用 4.45
-2. 编译到微信小程序会报错 xxx defined 这里注意微信小程序基础调试库要使用 3.5.3 
+LILISHOP 是基于 Spring Boot / Spring Cloud / Vue / Uniapp 开发的 Java 开源商城系统，支持 B2B2C 多商户商城、小程序商城、微服务商城、直播电商、分销返佣、秒杀活动、Docker 私有化部署。
 
+## 核心特性
 
+- Java商城系统
+- 开源商城系统
+- SpringBoot商城系统
+- SpringCloud微服务商城
+- B2B2C商城源码
+- 多商户商城系统
+- 小程序商城源码
+- Uniapp商城系统
+- Vue商城系统
+- Docker商城部署
+- 多语言商城
 
-### 商城介绍
+适用于：
+
+- 企业级商城系统
+- 私有化商城部署
+- Java商城系统二次开发
+- 开源商城源码学习
+- 多商户电商平台
+---
 
-**官网**：https://pickmall.cn
+### 1. 项目简介
 
-**更多 README**：https://gitee.com/beijing_hongye_huicheng/lilishop/blob/master/README.md
+**Lilishop** 是一款功能完善的B2B2C多商户商城系统，采用前后端分离架构，全端代码开源。
+后端基于 **SpringBoot3** 构建，具备高内聚、低耦合的特性，支持分布式部署。
+前端覆盖PC、H5、小程序和APP，基于 **Vue** 和 **uni-app** 开发。
 
-**演示站点**：https://m-b2b2c.pickmall.cn/ 账号：13011111111 验证码：111111
+-   **官方网站**: <https://pickmall.cn>
+-   **官方文档**: <https://docs.pickmall.cn>
+-   **Gitee 仓库**: <https://gitee.com/beijing_hongye_huicheng/lilishop>
+-   **GitHub 仓库**: <https://github.com/lilishop/lilishop>
 
-**商城 小程序/公众号/APP**：扫描二维码
 
-![image-20210511171611793](https://static.pickmall.cn/images/h5-qrcode.png)
+---
 
-## lilishop-uniapp如何在本地h5和微信小程序中运行
-https://www.bilibili.com/video/BV17K8EemEh2/
+### 2. 核心特性
 
-## lilishop-uniapp如何打包h5到服务器
-https://www.bilibili.com/video/BV1CX87exE64/
+-   **全端覆盖**: 一套代码库支持PC、H5、小程序、APP，降低开发和维护成本。
+-   **商家入驻**: 支持多商家入驻，构建平台化电商生态。
+-   **分布式架构**: 后端API服务化，支持独立部署和弹性伸缩。
+-   **前后端分离**: 清晰的职责划分，便于团队协作和独立开发。
+-   **容器化支持**: 提供Docker镜像和docker-compose配置，实现一键部署。
+-   **功能完善**: 涵盖客户、订单、商品、促销、店铺、运营、统计等完整电商业务模块。
 
-### 快速开始
+---
 
-#### 阅读文档
+### 3. 在线演示
 
-`uni-app` https://uniapp.dcloud.net.cn/api/
+**注意**: 演示站手机验证码统一为 `111111`。演示环境部署于 `master` 分支。
 
-`vue2` https://v2.cn.vuejs.org/
+-   **平台管理端**: <https://admin-b2b2c.pickmall.cn>
+    -   账号: `admin`
+    -   密码: `123456`
+-   **店铺管理端**: <https://store-b2b2c.pickmall.cn>
+    -   账号: `13011111111`
+    -   密码: `111111`
+-   **商城PC端**: <https://pc-b2b2c.pickmall.cn>
+-   **微信小程序**:
+    ![移动端体验二维码](https://static.pickmall.cn/images/h5-qrcode.png)
 
-`uView v1` https://v1.uviewui.com/
+---
 
-#### 环境
+### 4. 快速开始
 
-在开发之前保证本地安装了以下软件
-`hbulider` https://www.dcloud.io/hbuilderx.html
+#### 环境准备与部署
+详细的本地部署指南，请参考官方文档：
+[**部署文档 -> 环境准备**](https://docs.pickmall.cn/deply/deply.html)
 
-### 技术栈
+#### 数据库初始化
+-   **推荐方式**: 使用项目提供的 `docker-compose` 配置，可自动完成数据库（MySQL, Redis, Elasticsearch等）的部署与初始化。
+-   **手动方式**: 如果您选择手动部署，SQL脚本位于以下地址。请确保获取与您代码版本一致的SQL文件。
+    [**数据库脚本 (Gitee)**](https://gitee.com/beijing_hongye_huicheng/docker/tree/master/init/mysql)
 
-本项目技术栈为 `uni-app` + `scss` + `ES2015` + `uView` 提前学习和了解这些知识将帮助你更好地上手我们的项目。
+---
 
-### 安装
+### 5. 技术架构
 
-1. 克隆项目到本地
+#### 5.1 架构图
+![系统架构图](https://lili-system.oss-cn-beijing.aliyuncs.com/docs/%E6%9E%B6%E6%9E%84.png)
 
-```shell
-git clone https://gitee.com/beijing_hongye_huicheng/lilishop-uniapp.git
-```
+#### 5.2 后端技术栈
 
-2. 从`hbulider`中打开项目
+| 技术            | 选型            | 版本   | 备注/用途  |
+| :-------------- | :-------------- | :----- | :--------- |
+| 核心框架        | Spring Boot     | 3.5.6  | 简化应用开发 |
+| ORM框架         | MyBatis-Plus    | 3.5.8 | 数据持久化  |
+| 数据库          | MySQL (LTS)     | 8.3.0  | 关系型数据存储 |
+| 消息队列        | RocketMQ        | 2.3.4  | 异步任务与解耦 |
+| 缓存            | Redis           | -  | 数据缓存    |
+| 搜索引擎        | Elasticsearch   | -  | 商品搜索   |
+| 安全框架        | Spring Security | -  | 认证与授权  |
+| 分库分表        | ShardingSphere  | 4.0.0  | 数据水平扩展 |
+| 定时任务        | XXL-Job         | 2.3.0  | 分布式任务调度 |
+| 认证方案        | JWT             | -      | Token 方案 |
 
-```shell
-直接将项目拖进hbulider中点击运行即可
-```
+#### 5.3 前端技术栈
 
-### 目录结构
+**管理端 (平台/商家)**
 
-```
-├── api  // 接口
-├── components  // 组件
-├── config  // 配置文件
-├── CustomStartPage  // 打包配置的开屏页
-├── CustomStoryboard  // ios自定义storyboard启动页
-├── hybrid  // 广告配置页
-├── js_sdk  // 封装的js_sdk
-├── lib  // 封装的部分方法
-├── pages  // 页面
-├── plugins  // 插件
-├── static  // 静态资源
-├── store  // vuex
-├── utils  // 工具类
-├── uview-ui  // uview
-├── App.vue  // 入口页面
-├── main.js  // 入口文件
-├── manifest.json  // hbulider配置文件
-├── pages.json  // 路由配置文件
-├── uni.scss  // 全局样式
-└── vue.config.js  // vue配置文件
-```
+| 技术       | 选型       | 备注/用途  |
+| :--------- | :--------- | :--------- |
+| JS框架     | Vue.js     | 核心框架   |
+| UI库       | iView      | 界面组件   |
+| 状态管理   | Vuex       | 全局状态管理 |
+| 路由       | Vue Router | 页面路由   |
+| HTTP客户端 | axios      | API请求    |
 
-### 运行
+**移动端 (H5/小程序/APP)**
 
-#### 运行在 h5
+| 技术      | 选型    | 备注/用途      |
+ | :-------- | :------ | :------------- |
+| 核心框架  | uni-app | 跨平台开发框架 |
+| UI库      | uViewUI | 丰富的组件库   |
+| CSS预处理 | SCSS    | 样式开发       |
 
-在`hbulider`中点击`运行`->`运行到浏览器`->`选择自己的浏览器九号`
+### 6.功能列表
 
-#### 运行在微信小程序
+[功能清单](https://bdwx2tfwwt.feishu.cn/sheets/FFQKscQKDhUx60to1k9cbMngnYb?from=from_copylink)
 
-1.需要保证本地要有`微信开发者工具` https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
 
-2.在`hbulider`中点击`运行`->`运行到小程序模拟器`->`微信开发者工具` 运行的时候需要配置小程序的`appid`，配置完成后即可运行
 
 
 
-#### 运行 APP
+### 7. 开源与授权
 
-##### 运行在安卓
+1.  **开源协议**: 本项目遵循 `AGPL-3.0` 开源协议。
+2.  **使用范围**: 仅允许用于个人学习、研究和非商业用途。
+3.  **禁止行为**: 禁止将本项目的代码和资源用于任何形式的商业销售。
+4.  **商业授权**: 如需商业使用，必须获得官方授权。授权为一次性永久授权，并提供持续的版本升级服务。详情请联系官网客服。
+5.  **软件著作权**: 本软件受国家计算机软件著作权保护（登记号：2021SR0805085）。
 
-在`hbulider`中点击`运行`->`运行到手机或模拟器`->`选择运行到安卓APP基座`
+---
 
-##### 运行在 IOS
+### 8. 社区与支持
 
-在`hbulider`中点击`运行`->`运行到手机或模拟器`->`选择运行到IOS基座`
+我们欢迎任何形式的交流与贡献。在提问前，请先查阅 [官方文档](https://docs.pickmall.cn/) ，并参考 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md) 以便高效沟通。
 
-
-
-
-### 项目配置/开发
-
-#### config配置
-在根目录`config`下的`config`设置中配置了一些默认的配置，可以根据自己的需求进行修改
-
-```
-const name = "lilishop"; //全局商城name
-const schemeName = "lilishop"; //唤醒app需要的schemeName
-export default {
-  name: name,
-  schemeLink: `${schemeName}://`, //唤起app地址
-  downloadLink: "https://pickmall.cn/download-page/index.html", //下载地址，下载app的地址
-  shareLink: "https://m-b2b2c.pickmall.cn", //分享地址，也就是在h5中默认的复制地址
-  appid: "", //小程序唯一凭证，即 AppID，可在「微信公众平台 - 设置 - 开发设置」页中获得。（需要已经成为开发者，且帐号没有异常状态）
-  aMapKey: "", //在高德中申请Web服务key
-  scanAuthNavigation: ["https://m-b2b2c.pickmall.cn/"], //扫码认证跳转域名配置 会根据此处配置的路由进行跳转
-  iosAppId: "id1564638363", //AppStore的应用地址id 具体在分享->拷贝链接中查看
-  logo: "https://lilishop-oss.oss-cn-beijing.aliyuncs.com/4c864e133c2944efad1f7282ac8a3b9e.png", //logo地址
-  customerServiceMobile: "13161366885", //客服电话
-  customerServiceEmail: "lili@lili.com", //客服邮箱
-  imWebSrc: "https://im.pickmall.cn", //IM地址
-  baseWsUrl: "wss://im-api.pickmall.cn/lili/webSocket", // IM WS 地址
-  enableGetClipboard: false, //是否启用粘贴板获取 scanAuthNavigation 中的链接，如果匹配则会跳转到对应页面
-  enableMiniBarStartUpApp: true, //是否在h5中右侧浮空按钮点击启动app
-  /**
-   * 如需更换主题请修改此处以及uni.scss中的全局颜色
-   */
-  mainColor: "#ff3c2a", // 主题色
-  lightColor: "#ff6b35", // 高亮主题色
-  aiderLightColor: "#ff9f28", // 辅助高亮颜色
-  defaultUserPhoto: "/static/missing-face.png", // 默认用户头像
-  enableFetchMobileLogin: false // 是否启用获取手机号登录 如果微信小程序提示封禁手机号获取权限 可将此选项设置成false作为备用登录方案
-};
-
-```
-#### 组件
-在根目录`components`下的`components`设置中配置了一些默认的组件，可以根据自己的需求进行修改或阅读组件详情代码以及README.md文档
-
-#### 页面
-在`pages`文件夹写入或修改页面代码，在`pages.json`中去配置页面路由，具体配置可以参考`pages.json` 或参考uni-app的文档
-
-在微信小程序中默认启用分包操作，如果需要在微信小程序中使用分包，需要在`pages.json`中配置分包路径，具体配置可以参考`pages.json` 或参考uni-app的文档
-
-#### 主题
-1.现在`config`中设置主题色
-
-2.在`uni.scss`中设置全局颜色
-
-3.替换项目中一些icon以及图片的颜色
-
-
-
-
-### 常见问题
-
-#### 微信小程序移动端启动报错
-
-小程序直播插件报错，在`manifest`中删除代码。
-![启动报错](https://docs.pickmall.cn/configure/images/live.png)
-
-#### 微信小程序上传文件过大超出 2MB
-
-1.关闭微信小程序，停止微信小程序运行
-
-2.重新点击运行小程序模拟器，在最下方有一个 `运行时是否压缩代码` 勾选并重新运行
-
-3.如果还是提示超出2MB，重新执行1步骤，然后点击`发行`->`小程序`即可
-
-4.以上1-3步骤都不行，可以尝试删除一些自己开发的代码或本地的静态资源图片
-
-#### 微信小程序在开发者工具中可以使用接口在测试版却不行
-1.首先保证是否填写`request`合法域名 在微信小程序后台配置
-
-2.需保证接口为https请求
-
-request合法域名基础配置如下
-```
-https://buyer-api.pickmall.cn
-https://common-api.pickmall.cn
-https://im-api.pickmall.cn
-https://restapi.amap.com
-```
-
-socket合法域名
-```
-wss://im-api.pickmall.cn
-```
-uploadFile合法域名
-```
-https://common-api.pickmall.cn
-```
-downloadFile合法域名
-```
-https://buyer-api.pickmall.cn
-https://common-api.pickmall.cn
-https://im-api.pickmall.cn
-https://lilishop-oss.oss-cn-beijing.aliyuncs.com
-```
-
-#### 如何配置API
-在根目录 `config` -> `api` 中配置开发环境以及生产环境 api 接口地址
-
-#### 运行报错
-初次运行时候可能因为本地环境缺少编译插件，这个时候一定要注意看报错信息，根据报错信息安装相应的插件即可
-
-#### 如何配置微信小程序appid
-在根目录 `manifest.json` 中配置微信小程序appid
-
-
-#### 微信登录报错
-需检查appId是否配置正确，在后台管理中信任登录的`appId`以及`appSecret`是否配置正确
-
-
-
+-   **[在线客服](https://work.weixin.qq.com/kfid/kfc4d8dc24a73c15f44)**
+-   **微信交流1群（已满）**
+-   **微信交流2群**:
+    ![微信群](https://lilishop-wechat.oss-cn-beijing.aliyuncs.com/wechat.jpg)
